@@ -16,6 +16,36 @@
     ],
     "releases": [
         {
+            "tagName": "v2.0.0",
+            "products": [
+                "MI 4.4.0"
+            ],
+            "operations": [
+                {
+                    "name": "createTopic",
+                    "description": "create a Topic.",
+                    "isHidden": false
+                },
+                {
+                    "name": "createTopicSubscription",
+                    "description": "Creates a subscription to a given topic",
+                    "isHidden": false
+                },
+                {
+                    "name": "pullMessage",
+                    "description": "Pulls messages from the server",
+                    "isHidden": false
+                },
+                {
+                    "name": "publishMessage",
+                    "description": "Adds message to the topic",
+                    "isHidden": false
+                }
+            ],
+            "connections": ["GOOGLEPUBSUB"],
+            "isHidden": false
+        },
+        {
             "tagName": "v1.0.2",
             "products": [
                 "MI 4.4.0",

@@ -1,0 +1,120 @@
+{
+  "connectorName": "googlepubsub",
+  "operationName": "subscribeTopic",
+  "title": "Create Topic Subscription",
+  "help": "<h1>Create Topic Subscription</h1><b>Create a new subscription to a Pub/Sub topic.</b><br><br>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "GOOGLEPUBSUB"
+              ],
+              "defaultType": "connection.GOOGLEPUBSUB",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "projectId",
+              "displayName": "Project ID",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "Google Cloud Project ID where the subscription will be created"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "topicName",
+              "displayName": "Topic Name",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "Name of the topic to subscribe to"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "subscriptionName",
+              "displayName": "Subscription Name",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "Name of the subscription to be created"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "ackDeadlineSeconds",
+              "displayName": "Acknowledgment Deadline (seconds)",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "Maximum time after a subscriber receives a message before the subscriber must acknowledge the message (10-600 seconds)"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "pushEndpoint",
+              "displayName": "Push Endpoint URL",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "URL for push delivery. If not specified, the subscription will use pull delivery"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "attributes",
+              "displayName": "Subscription Attributes",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "Additional attributes for the subscription in JSON format (e.g., '{\"key\":\"value\"}')"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

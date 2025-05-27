@@ -1,0 +1,195 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Cloud Pub/Sub API Create Subscription Operation Response Schema",
+  "description": "Schema representing the output of the Create Subscription operation in Cloud Pub/Sub API",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "description": "Response for the `Create Subscription` method.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the subscription. Format is `projects/{project}/subscriptions/{sub}`."
+        },
+        "topic": {
+          "type": "string",
+          "description": "The name of the topic from which this subscription is receiving messages. Format is `projects/{project}/topics/{topic}`."
+        },
+        "pushConfig": {
+          "type": "object",
+          "description": "If push delivery is used with this subscription, this field is used to configure it.",
+          "properties": {
+            "pushEndpoint": {
+              "type": "string",
+              "description": "A URL locating the endpoint to which messages should be pushed."
+            },
+            "attributes": {
+              "type": "object",
+              "description": "Endpoint configuration attributes that can control aspects of the message delivery.",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "oidcToken": {
+              "type": "object",
+              "description": "If specified, Pub/Sub will generate and attach an OIDC JWT token as an Authorization header in the HTTP request for every pushed message.",
+              "properties": {
+                "serviceAccountEmail": {
+                  "type": "string",
+                  "description": "The email address of the service account to be used for generating the OIDC token."
+                },
+                "audience": {
+                  "type": "string",
+                  "description": "Audience to be used when generating OIDC token. The audience claim identifies the recipients that the JWT is intended for."
+                }
+              }
+            }
+          }
+        },
+        "ackDeadlineSeconds": {
+          "type": "integer",
+          "description": "This value is the maximum time after a subscriber receives a message before the subscriber should acknowledge the message."
+        },
+        "retainAckedMessages": {
+          "type": "boolean",
+          "description": "Indicates whether to retain acknowledged messages. If true, then messages are not expunged from the subscription's backlog, even if they are acknowledged."
+        },
+        "messageRetentionDuration": {
+          "type": "string",
+          "description": "How long to retain unacknowledged messages in the subscription's backlog, from the moment a message is published."
+        },
+        "labels": {
+          "type": "object",
+          "description": "User-defined labels for this subscription.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "enableMessageOrdering": {
+          "type": "boolean",
+          "description": "If true, messages published with the same ordering key in the same region will be delivered in order."
+        },
+        "expirationPolicy": {
+          "type": "object",
+          "description": "A policy that specifies the conditions for this subscription's expiration.",
+          "properties": {
+            "ttl": {
+              "type": "string",
+              "description": "Specifies the time-to-live (TTL) for the subscription. The subscription is deleted when inactive for this period."
+            }
+          }
+        },
+        "filter": {
+          "type": "string",
+          "description": "An expression written in the Pub/Sub filtering language. If non-empty, only messages whose attributes match the filter are delivered on this subscription."
+        },
+        "deadLetterPolicy": {
+          "type": "object",
+          "description": "A policy that specifies the conditions for dead lettering messages in this subscription.",
+          "properties": {
+            "deadLetterTopic": {
+              "type": "string",
+              "description": "The name of the topic to which dead letter messages should be published."
+            },
+            "maxDeliveryAttempts": {
+              "type": "integer",
+              "description": "The maximum number of delivery attempts for any message before it is dead lettered."
+            }
+          }
+        },
+        "retryPolicy": {
+          "type": "object",
+          "description": "A policy that specifies how Pub/Sub retries message delivery for this subscription.",
+          "properties": {
+            "minimumBackoff": {
+              "type": "string",
+              "description": "The minimum delay between consecutive deliveries of a given message."
+            },
+            "maximumBackoff": {
+              "type": "string",
+              "description": "The maximum delay between consecutive deliveries of a given message."
+            }
+          }
+        },
+        "detached": {
+          "type": "boolean",
+          "description": "Indicates whether the subscription is detached from its topic. Detached subscriptions don't receive messages from their topic and don't retain any backlog."
+        },
+        "enableExactlyOnceDelivery": {
+          "type": "boolean",
+          "description": "If true, Pub/Sub provides the subscription with exactly-once delivery."
+        },
+        "topicMessageRetentionDuration": {
+          "type": "string",
+          "description": "Output only. Indicates the minimum duration for which a message is retained after it is published to the subscription's topic."
+        },
+        "state": {
+          "type": "string",
+          "description": "Output only. An output-only field indicating the state of the subscription."
+        },
+        "bigqueryConfig": {
+          "type": "object",
+          "description": "If delivery to BigQuery is used with this subscription, this field is used to configure it.",
+          "properties": {
+            "table": {
+              "type": "string",
+              "description": "The name of the BigQuery table to which to write messages."
+            },
+            "useTopicSchema": {
+              "type": "boolean",
+              "description": "When true, use the topic's schema for BigQuery message writing."
+            },
+            "writeMetadata": {
+              "type": "boolean",
+              "description": "When true, write message metadata to BigQuery."
+            }
+          }
+        },
+        "cloudStorageConfig": {
+          "type": "object",
+          "description": "If delivery to Cloud Storage is used with this subscription, this field is used to configure it.",
+          "properties": {
+            "bucket": {
+              "type": "string",
+              "description": "The name of the Cloud Storage bucket to which messages are written."
+            },
+            "filenamePrefix": {
+              "type": "string",
+              "description": "The prefix used for Cloud Storage filenames."
+            },
+            "filenameSuffix": {
+              "type": "string",
+              "description": "The suffix used for Cloud Storage filenames."
+            }
+          }
+        },
+        "analyticsHubSubscriptionInfo": {
+          "type": "object",
+          "description": "Output only. The information related to this subscription for analytics purposes.",
+          "properties": {
+            "subscriptionName": {
+              "type": "string",
+              "description": "The name of the analytics hub subscription."
+            }
+          }
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Metadata about the operation.",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "description": "HTTP status code of the API response."
+        }
+      }
+    },
+    "headers": {
+      "type": "object",
+      "description": "HTTP headers of the API response.",
+      "properties": {}
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Cloud Pub/Sub API Pull Messages Operation Response Schema",
+  "description": "Schema representing the output of the Pull Messages operation in Cloud Pub/Sub API",
+  "properties": {
+    "payload": {
+      "description": "Response for the `Pull` method.",
+      "properties": {
+        "receivedMessages": {
+          "description": "Received Pub/Sub messages. The Pub/Sub system will return zero messages if there are no more available in the backlog. The Pub/Sub system may return fewer than the `maxMessages` requested even if there are more messages available in the backlog."
+        }
+      }
+    },
+    "attributes": {
+      "description": "Metadata about the operation.",
+      "properties": {
+        "statusCode": {
+          "description": "HTTP status code of the API response."
+        }
+      }
+    },
+    "headers": {
+      "description": "HTTP headers of the API response.",
+      "properties": {}
+    }
+  }
+}

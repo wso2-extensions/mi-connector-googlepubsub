@@ -1,0 +1,80 @@
+{
+  "connectorName": "googlepubsub",
+  "operationName": "createTopic",
+  "title": "Create Topic",
+  "help": "<h1>Create Topic</h1><b>Create a new topic in Google Pub/Sub.</b><br><br>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "GOOGLEPUBSUB"
+              ],
+              "defaultType": "connection.GOOGLEPUBSUB",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "projectId",
+              "displayName": "Project ID",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "Google Cloud Project ID where the topic will be created"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "topicName",
+              "displayName": "Topic Name",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "Name of the topic to be created"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

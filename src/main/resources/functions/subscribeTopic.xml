@@ -16,7 +16,7 @@
   ~  specific language governing permissions and limitations
   ~  under the License.
 -->
-<template name="createTopicSubscription" xmlns="http://ws.apache.org/ns/synapse">
+<template name="subscribeTopic" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="projectId" description="Unique identifier of the project"/>
     <parameter name="subscriptionName" description="Name of the Subscription"/>
     <parameter name="topicName" description="The name of the topic from which this subscription is receiving messages"/>
@@ -24,7 +24,10 @@
                description="Maximum time after a subscriber receives a message before subscriber should acknowledge the message"/>
     <parameter name="pushEndpoint" description="A URL locating the endpoint to which messages should be pushed"/>
     <parameter name="attributes" description="Endpoint configuration attributes"/>
+    <parameter name="responseVariable" description="Name of the variable to store operation output"/>
+    <parameter name="overwriteBody" description="Replace Message Body with operation output"/>
     <sequence>
+        <header name="Authorization" expression="fn:concat('Bearer ', $ctx:_ACTIVE_ACCESS_TOKEN_)" scope="transport"/>
         <property name="uri.var.pubSubProjectId" expression="$func:projectId"/>
         <property name="uri.var.pubSubSubscriptionName" expression="$func:subscriptionName"/>
         <property name="pubSubTopicName" expression="$func:topicName"/>
