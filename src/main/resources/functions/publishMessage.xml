@@ -16,32 +16,35 @@
   ~  specific language governing permissions and limitations
   ~  under the License.
 -->
-<template name="pullMessage" xmlns="http://ws.apache.org/ns/synapse">
+<template name="publishMessage" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="projectId" description="Unique identifier of the project"/>
-    <parameter name="subscriptionName" description="Name of the Subscription"/>
-    <parameter name="maxMessages" description="The maximum number of messages returned for this request"/>
-    <parameter name="returnImmediately" description=" return the respond immediately or not"/>
+    <parameter name="topicName" description="Name of the Topic"/>
+    <parameter name="data" description="The message payload."/>
+    <parameter name="attributes" description="Optional attributes for this message."/>
+    <parameter name="responseVariable" description="Name of the variable to store operation output"/>
+    <parameter name="overwriteBody" description="Replace Message Body with operation output"/>
     <sequence>
+        <header name="Authorization" expression="fn:concat('Bearer ', $ctx:_ACTIVE_ACCESS_TOKEN_)" scope="transport"/>
         <property name="uri.var.pubSubProjectId" expression="$func:projectId"/>
-        <property name="uri.var.pubSubSubscriptionName" expression="$func:subscriptionName"/>
-        <property name="pubSubMaxMessages" expression="$func:maxMessages"/>
-        <property name="pubSubReturnImmediately" expression="$func:returnImmediately"/>
+        <property name="uri.var.pubSubTopicName" expression="$func:topicName"/>
+        <property name="pubSubData" expression="$func:data"/>
+        <property name="pubSubAttributes" expression="$func:attributes"/>
         <payloadFactory media-type="json">
             <format>
                 {
-                "maxMessages": "$1"
+                "messages":[{"data":"$1"}]
                 }
             </format>
             <args>
-                <arg expression="$ctx:pubSubMaxMessages"/>
+                <arg expression="base64Encode($ctx:pubSubData)"/>
             </args>
         </payloadFactory>
         <script language="js">
             <![CDATA[
-                var returnImmediately = mc.getProperty('pubSubReturnImmediately');
+                var attributes = mc.getProperty('pubSubAttributes');
                 var payload = mc.getPayloadJSON();
-                if (returnImmediately != null && returnImmediately != "") {
-                    payload.returnImmediately = returnImmediately;
+                if (attributes != null && attributes != "") {
+                    payload.messages[0].attributes = eval( "(" + attributes + ")" );
                 }
                 mc.setPayloadJSON(payload);
             ]]>
@@ -52,7 +55,7 @@
                 <call blocking="true">
                     <endpoint>
                         <http method="post"
-                              uri-template="{uri.var.pubSubApiUrl}/{uri.var.pubSubApiVersion}/projects/{uri.var.pubSubProjectId}/subscriptions/{uri.var.pubSubSubscriptionName}:pull"/>
+                              uri-template="{uri.var.pubSubApiUrl}/{uri.var.pubSubApiVersion}/projects/{uri.var.pubSubProjectId}/topics/{uri.var.pubSubTopicName}:publish"/>
                     </endpoint>
                 </call>
             </then>
@@ -60,7 +63,7 @@
                 <call>
                     <endpoint>
                         <http method="post"
-                              uri-template="{uri.var.pubSubApiUrl}/{uri.var.pubSubApiVersion}/projects/{uri.var.pubSubProjectId}/subscriptions/{uri.var.pubSubSubscriptionName}:pull"/>
+                              uri-template="{uri.var.pubSubApiUrl}/{uri.var.pubSubApiVersion}/projects/{uri.var.pubSubProjectId}/topics/{uri.var.pubSubTopicName}:publish"/>
                     </endpoint>
                 </call>
             </else>

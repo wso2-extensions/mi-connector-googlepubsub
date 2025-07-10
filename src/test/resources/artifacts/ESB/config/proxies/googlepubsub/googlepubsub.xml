@@ -49,15 +49,15 @@
                         <projectId>{$ctx:projectId}</projectId>
                     </googlepubsub.createTopic>
                 </case>
-                <case regex="urn:createTopicSubscription">
-                    <googlepubsub.createTopicSubscription>
+                <case regex="urn:subscribeTopic">
+                    <googlepubsub.subscribeTopic>
                         <topicName>{$ctx:topicName}</topicName>
                         <projectId>{$ctx:projectId}</projectId>
                         <ackDeadlineSeconds>{$ctx:ackDeadlineSeconds}</ackDeadlineSeconds>
                         <subscriptionName>{$ctx:subscriptionName}</subscriptionName>
                         <pushEndpoint>{$ctx:pushEndpoint}</pushEndpoint>
                         <attributes>{$ctx:attributes}</attributes>
-                    </googlepubsub.createTopicSubscription>
+                    </googlepubsub.subscribeTopic>
                 </case>
                 <case regex="urn:publishMessage">
                     <googlepubsub.publishMessage>

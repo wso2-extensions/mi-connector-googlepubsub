@@ -1,0 +1,100 @@
+{
+  "connectorName": "googlepubsub",
+  "operationName": "publishMessage",
+  "title": "Publish Message",
+  "help": "<h1>Publish Message</h1><b>Publish a message to a Pub/Sub topic.</b><br><br>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "GOOGLEPUBSUB"
+              ],
+              "defaultType": "connection.GOOGLEPUBSUB",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "projectId",
+              "displayName": "Project ID",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "Google Cloud Project ID containing the topic"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "topicName",
+              "displayName": "Topic Name",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "Name of the topic to publish the message to"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "data",
+              "displayName": "Message Data",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "The message payload to be published (will be base64 encoded automatically)"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "attributes",
+              "displayName": "Message Attributes",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "Additional attributes for the message (JSON object format)"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

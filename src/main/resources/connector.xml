@@ -19,8 +19,7 @@
 <connector>
     <component name="googlepubsub" package="org.wso2.carbon.connector">
         <dependency component="config"/>
-        <dependency component="projectsSubscriptions"/>
-        <dependency component="projectsTopics"/>
+        <dependency component="functions"/>
         <description>google Pub/Sub v1 connector</description>
     </component>
     <displayName>Google Pub/Sub</displayName>

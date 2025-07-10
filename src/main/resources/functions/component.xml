@@ -16,13 +16,25 @@
   ~  specific language governing permissions and limitations
   ~  under the License.
 -->
-<component name="projectsTopics" type="synapse/template">
+<component name="functions" type="synapse/template">
     <subComponents>
         <component name="createTopic">
+            <displayName>Create Topic</displayName>
             <file>createTopic.xml</file>
             <description>create a Topic.</description>
         </component>
+        <component name="subscribeTopic">
+            <displayName>Subscribe Topic</displayName>
+            <file>subscribeTopic.xml</file>
+            <description>Subscribe a Topic</description>
+        </component>
+        <component name="pullMessage">
+            <displayName>Pull Message</displayName>
+            <file>pullMessage.xml</file>
+            <description>Pulls messages from the server</description>
+        </component>
         <component name="publishMessage">
+            <displayName>Publish Message</displayName>
             <file>publishMessage.xml</file>
             <description>Adds message to the topic</description>
         </component>

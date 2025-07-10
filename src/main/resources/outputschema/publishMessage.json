@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Cloud Pub/Sub API Publish Messages to Topic Operation Response Schema",
+  "description": "Schema representing the output of the Publish Messages to Topic operation in Cloud Pub/Sub API",
+  "properties": {
+    "payload": {
+      "description": "Response for the `Publish` method.",
+      "properties": {
+        "messageIds": {
+          "description": "The server-assigned ID of each published message, in the same order as the messages in the request. IDs are guaranteed to be unique within the topic."
+        }
+      }
+    },
+    "attributes": {
+      "description": "Metadata about the operation.",
+      "properties": {
+        "statusCode": {
+          "description": "HTTP status code of the API response."
+        }
+      }
+    },
+    "headers": {
+      "description": "HTTP headers of the API response.",
+      "properties": {}
+    }
+  }
+}
